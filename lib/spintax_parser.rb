@@ -1,5 +1,6 @@
 require "spintax_parser/version"
+require "string"
 
 module SpintaxParser
-  # Your code goes here...
+  # Nothing to do here.
 end
