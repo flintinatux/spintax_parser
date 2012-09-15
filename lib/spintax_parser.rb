@@ -1,6 +1,15 @@
 require "spintax_parser/version"
-require "string"
 
 module SpintaxParser
-  # Nothing to do here.
-end
+  
+  SPINTAX_PATTERN = /{([^{}]*)}/
+
+  def unspin
+    spun = clone.to_s
+    while spun =~ SPINTAX_PATTERN
+      spun.gsub!(SPINTAX_PATTERN) { $1.split('|').sample }
+    end
+    spun
+  end
+
+end # SpintaxParser

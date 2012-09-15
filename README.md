@@ -1,6 +1,6 @@
 # SpintaxParser
 
-TODO: Write a gem description
+Monkey patches two new string methods to unspin text written in spintax for automated article generation. Can handle nested spintax.
 
 ## Installation
 
@@ -18,7 +18,10 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
+    10.times do
+      puts spintext.unspin
+    end
 
 ## Contributing
 

@@ -1,4 +1,4 @@
-require 'spintax_parser'
+require 'string'
 
 describe String do
 
@@ -29,30 +29,6 @@ describe String do
       let(:result) { spintext.unspin }
       subject { result }
       it { should_not == spintext }
-      it { should_not =~ spintax_pattern }
-    end
-  end
-
-  describe "calling unspin!" do
-    
-    describe "on plaintext" do
-      
-      it "should not change the plaintext" do
-        expect { plaintext.unspin! }.not_to change { plaintext }
-      end
-
-      let(:result) { plaintext.unspin! }
-      it "should return nil" do
-        result.should be nil
-      end
-    end
-
-    describe "on spintext" do
-      
-      let!(:original) { spintext.dup }
-      before { spintext.unspin! }
-      subject { spintext }
-      it { should_not == original }
       it { should_not =~ spintax_pattern }
     end
   end
