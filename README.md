@@ -1,6 +1,6 @@
 # SpintaxParser
 
-Monkey patches two new string methods to unspin text written in spintax for automated article generation. Can handle nested spintax.
+A Ruby mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax.
 
 ## Installation
 
@@ -10,7 +10,7 @@ Add this line to your application's Gemfile:
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -18,10 +18,24 @@ Or install it yourself as:
 
 ## Usage
 
+My favorite way is to mix SpintaxParser directly into the global String class, like this:
+
+    require 'spintax_parser'
+
+    class String
+      include SpintaxParser
+    end
+
+Then you can safely call `unspin` on any string in your application:
+
     spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
     10.times do
       puts spintext.unspin
     end
+
+And don't worry: calling `unspin` on a string with no spintax will safely return an unaffected copy of the string.
+
+Note that the `unspin` method doesn't really care if the object you mix it into is a String or not, as long as its `to_s` method returns a string written in spintax.
 
 ## Contributing
 
