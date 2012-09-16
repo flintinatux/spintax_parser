@@ -18,7 +18,7 @@ Or install it yourself as:
 
 ## Usage
 
-My favorite way is to mix SpintaxParser directly into the global String class, like this:
+Perhaps the simplest way to use it is to mix SpintaxParser directly into the global String class, like this:
 
     require 'spintax_parser'
 
@@ -33,9 +33,22 @@ Then you can safely call `unspin` on any string in your application:
       puts spintext.unspin
     end
 
+And you will end up with several random variations of the same text, such as:
+
+    Hi worlds.
+    Hi planet?
+    Hello world?
+    Hi planet?
+    Hi world?
+    Hi world!
+    Hi world.
+    Hello world.
+    Hello world!
+    Hello worlds.
+
 And don't worry: calling `unspin` on a string with no spintax will safely return an unaffected copy of the string.
 
-Note that the `unspin` method doesn't really care if the object you mix it into is a String or not, as long as its `to_s` method returns a string written in spintax.
+Also, note that the `unspin` method doesn't really care if the class you mix it into is a descendant of String or not, as long as its `to_s` method returns a string written in spintax.
 
 ## Contributing
 
