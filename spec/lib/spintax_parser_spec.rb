@@ -1,6 +1,10 @@
-require 'string'
+require 'spintax_parser'
 
-describe String do
+class String
+  include SpintaxParser
+end
+
+describe SpintaxParser do
 
   let(:plaintext) { 'Hello world.' }
   let(:spintext) { 'Find this. {Hello|Hi} to the {{world|worlds} out there|planet}{!|.|?} Cool.' }
