@@ -1,4 +1,4 @@
-# SpintaxParser
+# SpintaxParser  [![Build Status](https://secure.travis-ci.org/flintinatux/spintax_parser.png)](http://travis-ci.org/flintinatux/spintax_parser)
 
 A Ruby mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax.
 
