@@ -15,8 +15,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = SpintaxParser::VERSION
 
+  gem.add_dependency 'backports'
   gem.add_development_dependency 'rspec', '~> 2.11.0'
   gem.add_development_dependency 'guard-rspec', '~> 1.2.1'
-  gem.add_development_dependency 'rb-inotify', '~> 0.8.8'
-  gem.add_development_dependency 'libnotify', '~> 0.5.9'
 end

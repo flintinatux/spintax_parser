@@ -1,4 +1,5 @@
 require "spintax_parser/version"
+require "backports" if RUBY_VERSION < "1.9"
 
 module SpintaxParser
   
