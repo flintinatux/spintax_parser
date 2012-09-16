@@ -8,7 +8,7 @@ describe SpintaxParser do
 
   let(:plaintext) { 'Hello world.' }
   let(:spintext) { 'Find this. {Hello|Hi} to the {{world|worlds} out there|planet}{!|.|?} Cool.' }
-  let(:spintax_pattern) { /{[^{}]*}/ }
+  let(:spintax_pattern) { /\{[^{}]*\}/ }
 
   describe "calling unspin" do
     

@@ -3,7 +3,7 @@ require "backports" if RUBY_VERSION < "1.9"
 
 module SpintaxParser
   
-  SPINTAX_PATTERN = /{([^{}]*)}/
+  SPINTAX_PATTERN = %r/\{([^{}]*)\}/
 
   def unspin
     spun = clone.to_s
