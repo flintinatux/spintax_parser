@@ -33,7 +33,7 @@ Then you can safely call `unspin` on any string in your application:
       puts spintext.unspin
     end
 
-And you will end up with several random variations of the same text, such as:
+Run the code above, and you will end up with several random variations of the same text, such as:
 
     Hi worlds.
     Hi planet?
