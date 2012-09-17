@@ -6,7 +6,9 @@ A mixin to parse "spintax", a text format used for automated article generation.
 
 Add this line to your application's Gemfile:
 
-    gem 'spintax_parser'
+```ruby
+gem 'spintax_parser'
+```
 
 And then execute:
 
@@ -20,18 +22,22 @@ Or install it yourself as:
 
 Perhaps the simplest way to use it is to mix SpintaxParser directly into the global String class, like this:
 
-    require 'spintax_parser'
+```ruby
+require 'spintax_parser'
 
-    class String
-      include SpintaxParser
-    end
+class String
+  include SpintaxParser
+end
+```
 
 Then you can safely call `unspin` on any string in your application:
 
-    spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
-    10.times do
-      puts spintext.unspin
-    end
+```ruby
+spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
+10.times do
+  puts spintext.unspin
+end
+```
 
 Run the code above, and you will end up with several random variations of the same text, such as:
 
