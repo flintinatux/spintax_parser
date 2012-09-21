@@ -2,6 +2,8 @@
 
 A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax.
 
+Read more about the motivation behind it at [the announcement of its initial release](http://madhackerdesigns.com/spintax_parser-gem-v0-0-1-released/ "spintax_parser gem v0.0.1 released").
+
 ## Installation
 
 Add this line to your application's Gemfile:
