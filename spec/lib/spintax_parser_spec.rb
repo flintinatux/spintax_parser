@@ -36,4 +36,11 @@ describe SpintaxParser do
       it { should_not =~ spintax_pattern }
     end
   end
+
+  it "should count spun variations correctly" do
+    'one {two|three} four'.count_spun_variations.should eq 2
+    '{one|two {three|four}} five'.count_spun_variations.should eq 3
+    '{one|two} three {four|five}'.count_spun_variations.should eq 4
+    'one {{two|three} four|five {six|seven}} eight {nine|ten}'.count_spun_variations.should eq 8
+  end
 end
