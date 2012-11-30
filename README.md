@@ -1,6 +1,6 @@
 # SpintaxParser  [![Build Status](https://secure.travis-ci.org/flintinatux/spintax_parser.png)](http://travis-ci.org/flintinatux/spintax_parser)  [![Dependency Status](https://gemnasium.com/flintinatux/spintax_parser.png)](https://gemnasium.com/flintinatux/spintax_parser)  [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/flintinatux/spintax_parser)
 
-A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax.
+A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of unique variations.
 
 Read more about the motivation behind it at [the announcement of its initial release](http://madhackerdesigns.com/spintax_parser-gem-v0-0-1-released/ "spintax_parser gem v0.0.1 released").
 
@@ -57,6 +57,13 @@ Run the code above, and you will end up with several random variations of the sa
 And don't worry: calling `unspin` on a string with no spintax will safely return an unaffected copy of the string.
 
 Also, note that the `unspin` method doesn't really care if the class you mix it into is a descendant of String or not, as long as its `to_s` method returns a string written in spintax.
+
+Now you can also count the total number of unique variations of a spintax string. If you've mixed the SpintaxParser into your String class like above, just call the `count_spintax_variations` method on any string as shown below:
+
+```ruby
+spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
+puts spintext.count_spintax_variations   # => 18
+```
 
 ## Contributing
 

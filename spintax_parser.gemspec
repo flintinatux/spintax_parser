@@ -4,7 +4,7 @@ require File.expand_path('../lib/spintax_parser/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Scott McCormack"]
   gem.email         = ["mail@madhackerdesigns.com"]
-  gem.description   = %q{A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of spun variations.}
+  gem.description   = %q{A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of unique variations.}
   gem.summary       = gem.description
   gem.homepage      = "https://github.com/flintinatux/spintax_parser"
 
