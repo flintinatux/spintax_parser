@@ -13,7 +13,7 @@ module SpintaxParser
     spun
   end
 
-  def count_spun_variations
+  def count_spintax_variations
     spun = dup.to_s
     spun.gsub! %r/[^{|}]+/, '1'
     spun.gsub! %r/\{/, '('

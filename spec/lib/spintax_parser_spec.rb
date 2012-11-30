@@ -38,9 +38,10 @@ describe SpintaxParser do
   end
 
   it "should count spun variations correctly" do
-    'one {two|three} four'.count_spun_variations.should eq 2
-    '{one|two {three|four}} five'.count_spun_variations.should eq 3
-    '{one|two} three {four|five}'.count_spun_variations.should eq 4
-    'one {{two|three} four|five {six|seven}} eight {nine|ten}'.count_spun_variations.should eq 8
+    'one {two|three} four'.count_spintax_variations.should eq 2
+    '{one|two {three|four}} five'.count_spintax_variations.should eq 3
+    '{one|two} three {four|five}'.count_spintax_variations.should eq 4
+    'one {{two|three} four|five {six|seven}} eight {nine|ten}'.count_spintax_variations.should eq 8
+    '{Hello|Hi} {{world|worlds}|planet}{!|.|?}'.count_spintax_variations.should eq 18
   end
 end
