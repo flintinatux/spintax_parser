@@ -4,7 +4,7 @@ require File.expand_path('../lib/spintax_parser/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Scott McCormack"]
   gem.email         = ["mail@madhackerdesigns.com"]
-  gem.description   = %q{A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of unique variations.}
+  gem.description   = %q{A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of unique variations. Now also supports consistent unspinning!}
   gem.summary       = gem.description
   gem.homepage      = "https://github.com/flintinatux/spintax_parser"
 
@@ -15,6 +15,6 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = SpintaxParser::VERSION
 
-  gem.add_dependency 'backports'
-  gem.add_development_dependency 'rspec', '~> 2.12.0'
+  gem.add_dependency 'backports', '~> 3.3'
+  gem.add_development_dependency 'rspec', '~> 2.12'
 end

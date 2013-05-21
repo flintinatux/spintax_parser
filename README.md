@@ -1,6 +1,6 @@
-# SpintaxParser  [![Build Status](https://secure.travis-ci.org/flintinatux/spintax_parser.png)](http://travis-ci.org/flintinatux/spintax_parser)  [![Dependency Status](https://gemnasium.com/flintinatux/spintax_parser.png)](https://gemnasium.com/flintinatux/spintax_parser)  [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/flintinatux/spintax_parser)
+# SpintaxParser  [![Build Status](https://secure.travis-ci.org/flintinatux/spintax_parser.png)](http://travis-ci.org/flintinatux/spintax_parser)  [![Dependency Status](https://gemnasium.com/flintinatux/spintax_parser.png)](https://gemnasium.com/flintinatux/spintax_parser)  [![Code Climate](https://codeclimate.com/github/flintinatux/spintax_parser.png)](https://codeclimate.com/github/flintinatux/spintax_parser)
 
-A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of unique variations.
+A mixin to parse "spintax", a text format used for automated article generation. Can handle nested spintax, and can count the total number of unique variations. Now also supports [consistent unspinning](#consistent-unspinning)!
 
 Read more about the motivation behind it at [the announcement of its initial release](http://madhackerdesigns.com/spintax_parser-gem-v0-0-1-released/ "spintax_parser gem v0.0.1 released").
 
@@ -22,17 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-Perhaps the simplest way to use it is to mix SpintaxParser directly into the global String class, like this:
+Perhaps the simplest way to use it is to mix `SpintaxParser` directly into the global `String` class, like this:
 
 ```ruby
 require 'spintax_parser'
-
 class String
   include SpintaxParser
 end
 ```
 
-Then you can safely call `unspin` on any string in your application:
+Then you can safely call `#unspin` on any string in your application:
 
 ```ruby
 spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
@@ -54,15 +53,27 @@ Run the code above, and you will end up with several random variations of the sa
     Hello world!
     Hello worlds.
 
-And don't worry: calling `unspin` on a string with no spintax will safely return an unaffected copy of the string.
+And don't worry: calling `#unspin` on a string with no spintax will safely return an unaffected copy of the string.
 
-Also, note that the `unspin` method doesn't really care if the class you mix it into is a descendant of String or not, as long as its `to_s` method returns a string written in spintax.
+Also, note that the `#unspin` method doesn't really care if the class you mix it into is a descendant of `String` or not, as long as its `#to_s` method returns a string written in spintax.
 
-Now you can also count the total number of unique variations of a spintax string. If you've mixed the SpintaxParser into your String class like above, just call the `count_spintax_variations` method on any string as shown below:
+### Consistent unspinning
+
+Got a special project that requires unspinning the same spintax the same way in certain circumstances? No problem. If you're using a Ruby version >= 1.9.3, you can pass a pre-seeded random number generator to the `#unspin` method just like you would to the `Array#sample` method. Et voila! Consistent unspinning!
+
+```ruby
+seed = Random.new_seed
+spintext.unspin :random => Random.new(seed)  # => "Hello world!"
+spintext.unspin :random => Random.new(seed)  # => "Hello world!"
+```
+
+### Counting total variations
+
+You can also count the total number of unique variations of a spintax string. If you've mixed the `SpintaxParser` into your `String` class like above, just call the `#count_spintax_variations` method on any string as shown below:
 
 ```ruby
 spintext = "{Hello|Hi} {{world|worlds}|planet}{!|.|?}"
-puts spintext.count_spintax_variations   # => 18
+spintext.count_spintax_variations  # => 18
 ```
 
 ## Contributing

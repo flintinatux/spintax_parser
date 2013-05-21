@@ -1,14 +1,14 @@
-require "spintax_parser/version"
-require "backports" if RUBY_VERSION < "1.9"
+require 'spintax_parser/version'
+require 'backports/1.9.1/array/sample' if RUBY_VERSION < '1.9.1'
 
 module SpintaxParser
   
   SPINTAX_PATTERN = %r/\{([^{}]*)\}/
 
-  def unspin
+  def unspin(options={})
     spun = dup.to_s
     while spun =~ SPINTAX_PATTERN
-      spun.gsub!(SPINTAX_PATTERN) { $1.split('|').sample }
+      parse_the_spintax_in spun, options
     end
     spun
   end
@@ -25,4 +25,15 @@ module SpintaxParser
     eval spun
   end
 
-end # SpintaxParser
+  private
+
+    if RUBY_VERSION >= '1.9.3'
+      def parse_the_spintax_in(spun, options={})
+        spun.gsub!(SPINTAX_PATTERN) { $1.split('|').sample(options) }
+      end
+    else
+      def parse_the_spintax_in(spun, options={})
+        spun.gsub!(SPINTAX_PATTERN) { $1.split('|').sample }
+      end
+    end
+end

@@ -12,21 +12,19 @@ describe SpintaxParser do
 
   describe "calling unspin" do
     
-    describe "on plaintext" do
-      
-      it "should not change the plaintext" do
+    context "on plaintext" do
+      it "does not change the plaintext" do
         expect { plaintext.unspin }.not_to change { plaintext }
       end
 
       let(:result) { plaintext.unspin }
-      it "should return the same plaintext" do
+      it "returns the same plaintext" do
         result.should == plaintext
       end
     end
 
-    describe "on spintext" do
-      
-      it "should not change the spintext" do
+    context "on spintext" do
+      it "does not change the spintext" do
         expect { spintext.unspin }.not_to change { spintext }
       end
 
@@ -34,6 +32,17 @@ describe SpintaxParser do
       subject { result }
       it { should_not == spintext }
       it { should_not =~ spintax_pattern }
+    end
+
+    if RUBY_VERSION >= '1.9.3'
+      context "with the same rng supplied" do
+        it "produces the same unspun version each time" do
+          seed = Random.new_seed
+          unspun1 = spintext.unspin :random => Random.new(seed)
+          unspun2 = spintext.unspin :random => Random.new(seed)
+          unspun1.should eq unspun2
+        end
+      end
     end
   end
 
