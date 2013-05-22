@@ -3,7 +3,7 @@ require 'backports/1.9.1/array/sample' if RUBY_VERSION < '1.9.1'
 
 module SpintaxParser
   
-  SPINTAX_PATTERN = %r/\{([^{}]*)\}/
+  SPINTAX_PATTERN = %r/\{([^{|}]+(\|[^{|}]+)+)\}/
 
   def unspin(options={})
     spun = dup.to_s
