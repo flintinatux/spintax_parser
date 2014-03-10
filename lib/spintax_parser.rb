@@ -2,8 +2,8 @@ require 'spintax_parser/version'
 require 'backports/1.9.1/array/sample' if RUBY_VERSION < '1.9.1'
 
 module SpintaxParser
-  
-  SPINTAX_PATTERN = %r/\{([^{|}]+(\|[^{|}]+)+)\}/
+
+  SPINTAX_PATTERN = /\{([^{}]*)\}/
 
   def unspin(options={})
     spun = dup.to_s
@@ -15,25 +15,32 @@ module SpintaxParser
 
   def count_spintax_variations
     spun = dup.to_s
-    spun.gsub! %r/[^{|}]+/, '1'
-    spun.gsub! %r/\{/, '('
-    spun.gsub! %r/\|/, '+'
-    spun.gsub! %r/\}/, ')'
-    spun.gsub! %r/\)\(/, ')*('
-    spun.gsub! %r/\)1/, ')*1'
-    spun.gsub! %r/1\(/, '1*('
-    eval spun
+    while spun =~ /([\{\|])([\|\}])/
+      spun.gsub! /([\{\|])([\|\}])/, '\11\2'
+    end
+    spun.gsub! /[^{|}]+/, '1'
+    spun.gsub! /\{/, '('
+    spun.gsub! /\|/, '+'
+    spun.gsub! /\}/, ')'
+    spun.gsub! /\)\(/, ')*('
+    spun.gsub! /\)1/, ')*1'
+    spun.gsub! /1\(/, '1*('
+    begin
+      eval spun
+    rescue SyntaxError
+      nil
+    end
   end
 
   private
 
     if RUBY_VERSION >= '1.9.3'
       def parse_the_spintax_in(spun, options={})
-        spun.gsub!(SPINTAX_PATTERN) { $1.split('|').sample(options) }
+        spun.gsub!(SPINTAX_PATTERN) { $1.split('|',-1).sample options }
       end
     else
       def parse_the_spintax_in(spun, options={})
-        spun.gsub!(SPINTAX_PATTERN) { $1.split('|').sample }
+        spun.gsub!(SPINTAX_PATTERN) { $1.split('|',-1).sample }
       end
     end
 end

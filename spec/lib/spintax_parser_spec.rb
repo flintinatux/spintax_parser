@@ -6,12 +6,12 @@ end
 
 describe SpintaxParser do
 
-  let(:plaintext) { 'Hello world. { Please do not spin this. }' }
+  let(:plaintext) { 'Hello world. Please do not spin this.' }
   let(:spintext) { 'Find this. {Hello|Hi} to the {{world|worlds} out there|planet}{!|.|?} Cool.' }
-  let(:spintax_pattern) { /\{[^{}]*\}/ }
+  let(:spintax_pattern) { SpintaxParser::SPINTAX_PATTERN }
 
   describe "calling unspin" do
-    
+
     context "on plaintext" do
       it "does not change the plaintext" do
         expect { plaintext.unspin }.not_to change { plaintext }
@@ -52,5 +52,7 @@ describe SpintaxParser do
     '{one|two} three {four|five}'.count_spintax_variations.should eq 4
     'one {{two|three} four|five {six|seven}} eight {nine|ten}'.count_spintax_variations.should eq 8
     '{Hello|Hi} {{world|worlds}|planet}{!|.|?}'.count_spintax_variations.should eq 18
+    '{one|two|}'.count_spintax_variations.should eq 3
+    "{Can't|count|this one".count_spintax_variations.should eq nil
   end
 end
