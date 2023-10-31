@@ -36,7 +36,7 @@ module SpintaxParser
 
     if RUBY_VERSION >= '1.9.3'
       def parse_the_spintax_in(spun, options={})
-        spun.gsub!(SPINTAX_PATTERN) { $1.split('|',-1).sample options }
+        spun.gsub!(SPINTAX_PATTERN) { $1.split('|',-1).sample(**options.dup) }
       end
     else
       def parse_the_spintax_in(spun, options={})

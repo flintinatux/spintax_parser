@@ -38,9 +38,8 @@ describe SpintaxParser do
       context "with the same rng supplied" do
         it "produces the same unspun version each time" do
           seed = Random.new_seed
-          unspun1 = spintext.unspin :random => Random.new(seed)
-          unspun2 = spintext.unspin :random => Random.new(seed)
-          unspun1.should eq unspun2
+          spins = 10.times.map { spintext.unspin :random => Random.new(seed) }.uniq
+          spins.size.should eq 1
         end
       end
     end
